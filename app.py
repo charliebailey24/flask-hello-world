@@ -1,6 +1,6 @@
 """
 Author: Charlie Bailey
-Purpose: This file creates a Flask application and provides routes to test database connectivity, create a database table, insert data into the table, select data out of the table, and finally drop the table. This is being tested and deployed using the Render web hosting service.
+Purpose: This file creates a Flask application and provides routes to test database connectivity, create a database table, insert data into the table, select data out of the table, and finally drop the table. This app is being tested and deployed using the Render web hosting service.
 """
 
 from flask import Flask
@@ -40,7 +40,8 @@ def db_create():
     conn.close()
     return "Basketball Table Successfully Created"
 
-# db_insert
+# Route: '/db_insert'
+# Description: Inserts player data into the 'Basketball' table.
 @app.route('/db_insert')
 def insert():
     conn = psycopg2.connect("postgres://software_dev_lab_10_db_user:iajeORETZpYisK3P9WSiCJVGIQvVxhE0@dpg-cl5fk7d6fh7c73emhpo0-a/software_dev_lab_10_db")
@@ -57,7 +58,8 @@ def insert():
     conn.close()
     return "Basketball Table Successfully Populated"
 
-# db_select
+# Route: '/db_select'
+# Description: Selects all of the data in the 'Basketball' table and returns it in a table format.
 @app.route('/db_select')
 def select():
     conn = psycopg2.connect("postgres://software_dev_lab_10_db_user:iajeORETZpYisK3P9WSiCJVGIQvVxhE0@dpg-cl5fk7d6fh7c73emhpo0-a/software_dev_lab_10_db")
@@ -77,4 +79,15 @@ def select():
     response_string += "</table>"
     return response_string
 
-# db_drop
+# Route: '/db_drop'
+# Description: Drops the 'Basketball' table.
+@app.route('/db_drop')
+def drop():
+    conn = psycopg2.connect("postgres://software_dev_lab_10_db_user:iajeORETZpYisK3P9WSiCJVGIQvVxhE0@dpg-cl5fk7d6fh7c73emhpo0-a/software_dev_lab_10_db")
+    cur = conn.cursor()
+    cur.execute('''
+                DROP TABLE Basketball;
+                ''')
+    conn.commit()
+    conn.close()
+    return "Basketball Table Successfully Dropped"
