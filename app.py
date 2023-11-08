@@ -1,6 +1,9 @@
 """
 Author: Charlie Bailey
+
 Purpose: This file creates a Flask application and provides routes to test database connectivity, create a database table, insert data into the table, select data out of the table, and finally drop the table. This app is being tested and deployed using the Render web hosting service.
+
+Usage: Please use the URLs in the README file to test each of the routes below.
 """
 
 from flask import Flask
